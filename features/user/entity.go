@@ -1,21 +1,15 @@
 package user
 
-type Core struct {
-	ID       uint
-	Name     string
-	Phone    string
-	Email    string
-	Password string
-	Product  []ProductCore
-}
+import "time"
 
-type ProductCore struct {
-	ID     uint
-	UserID uint
-	Name   string
-	Image  string
-	Qty    uint
-	Price  uint
+type Core struct {
+	ID        uint
+	Name      string
+	Email     string
+	Password  string
+	Token     string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 type Repository interface {
@@ -23,7 +17,7 @@ type Repository interface {
 	Edit(data Core, id uint) (Core, error)
 	Remove(id uint) error
 	GetMyProfile(token uint) (Core, error)
-	GetByID(id uint) (Core, error)
+	Login(data Core) (Core, error)
 }
 
 type Service interface {
@@ -31,5 +25,5 @@ type Service interface {
 	Update(data Core, id uint) (Core, error)
 	Delete(id uint) error
 	ShowMyProfile(token uint) (Core, error)
-	GetByID(id uint) (Core, error)
+	Login(data Core) (Core, error)
 }
