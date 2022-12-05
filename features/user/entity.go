@@ -16,7 +16,6 @@ type Repository interface {
 	Insert(data Core) (Core, error)
 	Edit(data Core, id uint) (Core, error)
 	Remove(id uint) error
-	GetMyProfile(token uint) (Core, error)
 	Login(data Core) (Core, error)
 }
 
@@ -24,6 +23,5 @@ type Service interface {
 	Create(data Core) (Core, error)
 	Update(data Core, id uint) (Core, error)
 	Delete(id uint) error
-	ShowMyProfile(token uint) (Core, error)
 	Login(data Core) (Core, error)
 }
