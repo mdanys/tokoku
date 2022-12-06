@@ -2,12 +2,14 @@ package delivery
 
 import (
 	"net/http"
+	"os"
 	"strings"
 	"tokoku/features/user"
 	"tokoku/utils/middlewares"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 var validate = validator.New()
@@ -18,6 +20,10 @@ type userHandler struct {
 
 func New(e *echo.Echo, srv user.Service) {
 	handler := userHandler{srv: srv}
+	e.POST("/user", handler.Create())
+	e.PUT("/user", handler.Update(), middleware.JWT([]byte(os.Getenv("JWT_SECRET"))))
+	e.DELETE("/user", handler.Delete(), middleware.JWT([]byte(os.Getenv("JWT_SECRET"))))
+	e.POST("/login", handler.Login())
 }
 
 func (uh *userHandler) Create() echo.HandlerFunc {
