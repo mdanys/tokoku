@@ -19,8 +19,8 @@ func (cs *cartService) Create(data cart.Core) (cart.Core, error) {
 	return res, nil
 }
 
-func (cs *cartService) Update(data cart.Core) (cart.Core, error) {
-	res, err := cs.qry.Edit(data)
+func (cs *cartService) Update(data cart.Core, id uint) (cart.Core, error) {
+	res, err := cs.qry.Edit(data, id)
 	if err != nil {
 		return cart.Core{}, err
 	}

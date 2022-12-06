@@ -39,15 +39,15 @@ func (rq *repoQuery) Insert(data cart.Core) (cart.Core, error) {
 	return res, nil
 }
 
-func (rq *repoQuery) Edit(data cart.Core) (cart.Core, error) {
+func (rq *repoQuery) Edit(data cart.Core, id uint) (cart.Core, error) {
 	var cnv Cart = FromCore(data)
-	err := rq.db.Where("id = ?", cnv.ID).Updates(&cnv).Error
+	err := rq.db.Where("id = ?", id).Updates(&cnv).Error
 	if err != nil {
 		log.Error("error on edit cart: ", err.Error())
 		return cart.Core{}, nil
 	}
 
-	er := rq.db.First(&cnv, "id = ?", cnv.ID).Error
+	er := rq.db.First(&cnv, "id = ?", id).Error
 	if er != nil {
 		log.Error("error on getting after edit: ", err.Error())
 		return cart.Core{}, er
