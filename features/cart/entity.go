@@ -3,12 +3,18 @@ package cart
 type Core struct {
 	ID        uint
 	UserID    uint
-	ProductID uint
-	Name      string
-	Price     uint
 	Qty       uint
-	Detail    string
-	Image     string
+	ProductID uint
+	Product   ProductCore
+}
+
+type ProductCore struct {
+	ID     uint
+	Name   string
+	Price  uint
+	Qty    uint
+	Detail string
+	Image  string
 }
 
 type Repository interface {

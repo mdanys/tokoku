@@ -9,12 +9,9 @@ import (
 type Cart struct {
 	gorm.Model
 	UserID    uint
-	ProductID uint
-	Name      string `gorm:"-:migration;<-:false"`
-	Price     uint   `gorm:"-:migration;<-:false"`
 	Qty       uint
-	Detail    string `gorm:"-:migration;<-:false"`
-	Image     string `gorm:"-:migration;<-:false"`
+	ProductID uint
+	Product   Product `gorm:"foreignKey:ProductID"`
 }
 
 type Product struct {
@@ -24,19 +21,15 @@ type Product struct {
 	Qty    uint
 	Detail string
 	Image  string
-	Cart   []Cart `gorm:"foreignKey:ProductID"`
 }
 
 func FromCore(dc cart.Core) Cart {
 	return Cart{
 		Model:     gorm.Model{ID: dc.ID},
 		UserID:    dc.UserID,
-		ProductID: dc.ProductID,
-		Name:      dc.Name,
-		Price:     dc.Price,
 		Qty:       dc.Qty,
-		Detail:    dc.Detail,
-		Image:     dc.Image,
+		ProductID: dc.ProductID,
+		Product:   Product{Name: dc.Product.Name, Price: dc.Product.Price, Qty: dc.Product.Qty, Detail: dc.Product.Detail, Image: dc.Product.Image},
 	}
 }
 
@@ -44,12 +37,9 @@ func ToCore(c Cart) cart.Core {
 	return cart.Core{
 		ID:        c.ID,
 		UserID:    c.UserID,
-		ProductID: c.ProductID,
-		Name:      c.Name,
-		Price:     c.Price,
 		Qty:       c.Qty,
-		Detail:    c.Detail,
-		Image:     c.Image,
+		ProductID: c.ProductID,
+		Product:   cart.ProductCore{Name: c.Product.Name, Price: c.Product.Price, Qty: c.Product.Qty, Detail: c.Product.Detail, Image: c.Product.Image},
 	}
 }
 
@@ -59,12 +49,9 @@ func ToCoreArray(ca []Cart) []cart.Core {
 		arr = append(arr, cart.Core{
 			ID:        val.ID,
 			UserID:    val.UserID,
-			ProductID: val.ProductID,
-			Name:      val.Name,
-			Price:     val.Price,
 			Qty:       val.Qty,
-			Detail:    val.Detail,
-			Image:     val.Image,
+			ProductID: val.ProductID,
+			Product:   cart.ProductCore{Name: val.Product.Name, Price: val.Product.Price, Qty: val.Product.Qty, Detail: val.Product.Detail, Image: val.Product.Image},
 		})
 	}
 
