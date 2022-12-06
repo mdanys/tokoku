@@ -9,8 +9,8 @@ import (
 type Product struct {
 	gorm.Model
 	Name   string
-	Price  string
-	Qty    string
+	Price  uint
+	Qty    uint
 	Detail string
 	Image  string
 }

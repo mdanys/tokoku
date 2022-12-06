@@ -5,16 +5,16 @@ import "tokoku/features/product"
 type ProductResponse struct {
 	ID    uint   `json:"id_product" form:"id_product"`
 	Name  string `json:"name" form:"name"`
-	Price string `json:"price" form:"price"`
-	Qty   string `json:"qty" form:"qty"`
+	Price uint   `json:"price" form:"price"`
+	Qty   uint   `json:"qty" form:"qty"`
 	Image string `json:"image" form:"image"`
 }
 
 type DetailResponse struct {
 	ID     uint   `json:"id_product" form:"id_product"`
 	Name   string `json:"name" form:"name"`
-	Price  string `json:"price" form:"price"`
-	Qty    string `json:"qty" form:"qty"`
+	Price  uint   `json:"price" form:"price"`
+	Qty    uint   `json:"qty" form:"qty"`
 	Detail string `json:"detail" form:"detail"`
 	Image  string `json:"image" form:"image"`
 }

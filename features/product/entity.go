@@ -5,8 +5,8 @@ import "time"
 type Core struct {
 	ID        uint
 	Name      string
-	Price     string
-	Qty       string
+	Price     uint
+	Qty       uint
 	Detail    string
 	Image     string
 	CreatedAt time.Time
