@@ -12,3 +12,13 @@ type Core struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
+
+type Repository interface {
+	GetAll() ([]Core, error)
+	GetByID(id uint) (Core, error)
+}
+
+type Service interface {
+	ShowAll() ([]Core, error)
+	ShowByID(id uint) (Core, error)
+}

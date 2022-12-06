@@ -14,6 +14,11 @@ type UpdateFormat struct {
 	Password string `json:"password" form:"password" validate:"alpha,numeric"`
 }
 
+type LoginFormat struct {
+	Email    string `json:"email" form:"email"`
+	Password string `json:"password" form:"password"`
+}
+
 func ToCore(i interface{}) user.Core {
 	switch i.(type) {
 	case RegisterFormat:
@@ -22,6 +27,9 @@ func ToCore(i interface{}) user.Core {
 	case UpdateFormat:
 		cnv := i.(UpdateFormat)
 		return user.Core{Name: cnv.Name, Email: cnv.Email, Password: cnv.Password}
+	case LoginFormat:
+		cnv := i.(LoginFormat)
+		return user.Core{Email: cnv.Email, Password: cnv.Password}
 	}
 
 	return user.Core{}
