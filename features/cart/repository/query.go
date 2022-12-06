@@ -47,6 +47,12 @@ func (rq *repoQuery) Edit(data cart.Core) (cart.Core, error) {
 		return cart.Core{}, nil
 	}
 
+	er := rq.db.First(&cnv, "id = ?", cnv.ID).Error
+	if er != nil {
+		log.Error("error on getting after edit: ", err.Error())
+		return cart.Core{}, er
+	}
+
 	res := ToCore(cnv)
 	return res, nil
 }
