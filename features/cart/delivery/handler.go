@@ -25,7 +25,7 @@ func New(e *echo.Echo, srv cart.Service) {
 
 func (ch *cartHandler) Create() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		var input AddFormat
+		var input CartFormat
 		userId, _ := middlewares.ExtractToken(c)
 
 		err := c.Bind(&input)
@@ -46,7 +46,7 @@ func (ch *cartHandler) Create() echo.HandlerFunc {
 
 func (ch *cartHandler) Update() echo.HandlerFunc {
 	return func(c echo.Context) error {
-		var input UpdateFormat
+		var input CartFormat
 		id, _ := strconv.Atoi(c.Param("id"))
 		userId, _ := middlewares.ExtractToken(c)
 
