@@ -8,6 +8,13 @@ type Core struct {
 	Product   ProductCore
 }
 
+type UserCore struct {
+	ID    uint
+	Name  string
+	Role  string
+	Email string
+}
+
 type ProductCore struct {
 	ID     uint
 	Name   string

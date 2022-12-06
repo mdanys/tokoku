@@ -14,6 +14,12 @@ type Cart struct {
 	Product   Product `gorm:"foreignKey:ProductID"`
 }
 
+type User struct {
+	gorm.Model
+	Name  string
+	Role  string
+	Email string
+}
 type Product struct {
 	gorm.Model
 	Name   string
