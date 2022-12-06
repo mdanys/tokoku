@@ -5,6 +5,7 @@ import "time"
 type Core struct {
 	ID        uint
 	Name      string
+	Role      string
 	Email     string
 	Password  string
 	Token     string

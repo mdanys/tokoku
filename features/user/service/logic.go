@@ -67,7 +67,7 @@ func (us *userService) Login(input user.Core) (user.Core, error) {
 		return user.Core{}, err
 	}
 
-	res.Token = middlewares.GenerateToken(res.ID)
+	res.Token = middlewares.GenerateToken(res.ID, res.Role)
 
 	return res, nil
 }
